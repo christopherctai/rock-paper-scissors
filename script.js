@@ -1,6 +1,5 @@
-console.log("Hello World")
-
 console.log(game(playRound));
+
 
 function getComputerChoice() {
     let choices = ["Rock", "Paper", "Scissors"];
@@ -50,6 +49,7 @@ function game(playRound) {
 
 
 /*
+Pseudocode
 function with no input 
 	define array of choices 
 	randomly choose something from the array of Rock, Paper, or Scissors
