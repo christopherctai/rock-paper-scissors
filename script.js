@@ -22,28 +22,29 @@ function game(playRound) {
     let userWinCount = 0;
     let computerWinCount = 0;
     for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Choose your weapon!");
-        let choices = ["Rock", "Paper", "Scissors"];
-        if (!choices.includes(playerSelection.charAt(0).toUpperCase() + playerSelection.toLowerCase().slice(1))) {
-            computerWinCount++;
-            return "That is an invalid choice. Computer gets a point by default.";
-        };
+        let playerSelection = prompt(`Choose your weapon! This is round ${i + 1} out of 5`);
         playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
         let computerSelection = getComputerChoice();
-        let result = playRound(playerSelection, computerSelection);
-        if (result === `You lose! ${computerSelection} beats ${playerSelection}!`) {
+        let choices = ["Rock", "Paper", "Scissors"];
+        if (!choices.includes(playerSelection)) {
             computerWinCount++;
-        } else if (result === `You win! ${playerSelection} beats ${computerSelection}!`) {
-            userWinCount++;
+            console.log("That is an invalid choice. Computer gets a point by default.");
+        } else {
+            let result = playRound(playerSelection, computerSelection);
+            if (result === `You lose! ${computerSelection} beats ${playerSelection}!`) {
+                computerWinCount++;
+            } else if (result === `You win! ${playerSelection} beats ${computerSelection}!`) {
+                userWinCount++;
+            }
+            console.log(result);
         }
-        console.log(result);
     }
     if (userWinCount > computerWinCount) {
-        return "Game over! You won against the computer!";
-    } else if (userWinCount > computerWinCount) {
-        return "Game over! You lost against the computer!";
+        return `Game over! You won against the computer, User: ${userWinCount} points, Computer: ${computerWinCount} points!`;
+    } else if (userWinCount < computerWinCount) {
+        return `Game over! You lost against the computer, User: ${userWinCount} points, Computer: ${computerWinCount} points!`;
     } else {
-        return "Game over! It was a tie!";
+        return `Game over! It was a tie, User: ${userWinCount} points, Computer: ${computerWinCount} points!`;
     }
 }
 
