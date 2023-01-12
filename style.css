@@ -18,7 +18,9 @@
 }
 
 .header, 
-.result {
+.result,
+.ultimate-result,
+.play-again {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,8 +36,8 @@
 
 .score-headers {
     border: solid white;
-    width: 200px;
-}
+    width: 250px;
+} 
 
 
 .btn {
@@ -44,7 +46,13 @@
     width:100px;
 }
 
-.result {
+.result,
+.ultimate-result,
+.play-again {
     font-size: large;
     font-weight: 700;
+} 
+
+.hidden {
+    display: none;
 }

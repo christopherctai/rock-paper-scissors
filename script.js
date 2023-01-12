@@ -11,7 +11,21 @@ let playerScore = document.querySelector('.player-score');
 let computerScore = document.querySelector('.computer-score');
 
 let ultimateResult = document.querySelector('.ultimate-result');
-const playAgain = document.querySelector('.play-again');
+let playAgain = document.querySelector('.play-again');
+
+playAgain.addEventListener('click', () => {
+    resetGame();
+});
+
+function resetGame() {
+    playerScore.textContent = 0;
+    computerScore.textContent = 0;
+    playAgain.textContent = '';
+    playAgain.textContent= '';
+    playAgain.classList.toggle('hidden')
+    ultimateResult.textContent = '';
+    result.textContent = '';
+}
 
 
 function getComputerChoice() {
@@ -19,28 +33,30 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
+
 function playRound(playerSelection, computerSelection) {
-    if (playerScore === 5) {
-        ultimateResult.textContent = "You beat the computer and saved the world!";
-        playAgain.textContent = "Play Again?";
-    } else if (computerScore === 5) {
-        ultimateResult.textContent = "The computer beat you and is coming for your job!";
-        playAgain.textContent = "Play Again?";
-    } else {
-        if (playerSelection === computerSelection) {
-            result.textContent = "Tie! No one wins this round";
-            return console.log("Tie! No one wins this round");
-        } else if ((playerSelection === "Rock" && computerSelection === "Paper") || (playerSelection === "Paper" && computerSelection === "Scissors") || (playerSelection === "Scissors" && computerSelection === "Rock")) {
-            computerScore.textContent++;
-            result.textContent = `You lose! ${computerSelection} beats ${playerSelection}!`;
-            return console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
-        } else {
-            playerScore.textContent++;
-            result.textContent = `You win! ${playerSelection} beats ${computerSelection}!`;
-            return console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
+    if (playerSelection === computerSelection) {
+        result.textContent = "Tie! No one wins this round";
+        return console.log("Tie! No one wins this round");
+    } else if ((playerSelection === "Rock" && computerSelection === "Paper") || (playerSelection === "Paper" && computerSelection === "Scissors") || (playerSelection === "Scissors" && computerSelection === "Rock")) {
+        computerScore.textContent++;
+        result.textContent = `You lose! ${computerSelection} beats ${playerSelection}!`;
+        if (computerScore.textContent == 5) {
+            ultimateResult.textContent = "The computer beat you and is coming for your job!";
+            playAgain.classList.toggle('hidden');
+            playAgain.textContent = "Play Again?";
         }
+        // return console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
+    } else {
+        playerScore.textContent++;
+        result.textContent = `You win! ${playerSelection} beats ${computerSelection}!`;
+        if (playerScore.textContent == 5) {
+            ultimateResult.textContent = "You beat the computer and saved the world!";
+            playAgain.classList.toggle('hidden');
+            playAgain.textContent = "Play Again?";
+        }
+        // return console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
     }
-    
 }
 
 
